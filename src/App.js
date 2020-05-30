@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import Tabela from './Tabela.js';
+import Form from './Formulario.js';
 
 class App extends Component {
 
@@ -40,9 +41,9 @@ class App extends Component {
 
     this.setState(
       {
-        autores : autores.filter((autor, posAtual) => {
+        autores: autores.filter((autor, posAtual) => {
 
-          return posAtual!==index;
+          return posAtual !== index;
         }),
       }
     );
@@ -51,9 +52,10 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App" >
+      <Fragment>
         <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />
-      </div>
+        <Form />
+      </Fragment>
     );
   };
 }

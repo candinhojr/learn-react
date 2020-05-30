@@ -8,6 +8,7 @@ const TableHead = () => {
                 <th>Autores</th>
                 <th>Livros</th>
                 <th>Preços</th>
+                <th>Remover</th>
             </tr>
         </thead>
     );
