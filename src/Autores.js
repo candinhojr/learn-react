@@ -9,26 +9,31 @@ class Autores extends Component {
         this.state = {
             autores: [
                 {
+                    id: 1,
                     nome: 'Zygmunt Bauman',
                     livro: 'Modernidade Líquida',
                     preco: 'R$ 100'
                 },
                 {
+                    id: 2,
                     nome: 'Zygmunt Bauman',
                     livro: 'Amor Líquido',
                     preco: 'R$ 100'
                 },
                 {
+                    id: 3,
                     nome: 'Zygmunt Bauman',
                     livro: 'Vida Líquida',
                     preco: 'R$ 100'
                 },
                 {
+                    id: 4,
                     nome: 'Zygmunt Bauman',
                     livro: 'Medo Líquido',
                     preco: 'R$ 100'
                 },
                 {
+                    id: 5,
                     nome: 'Zygmunt Bauman',
                     livro: 'Tempos Líquidos',
                     preco: 'R$ 100'
