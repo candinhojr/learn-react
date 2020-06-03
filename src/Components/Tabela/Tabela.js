@@ -6,18 +6,36 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
+const CellDeleta = ({ removeDados, id, titulo }) => {
+    if (!removeDados) return null
+    
+    if (titulo) return <TableCell>Remover</TableCell>
+
+    return (
+        <TableCell>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                    removeDados(id)
+                }}
+            >
+                Remover
+        </Button>
+        </TableCell>
+    )
+}
 
 const Tabela = props => {
 
-    const { campos, dados, removeAutor } = props;
+    const { campos, dados, removeDados } = props;
 
     return (
         <Table>
             <TableHead>
                 <TableRow>
-                    {
-                        campos.map(campo => <TableCell>{campo.titulo}</TableCell>)
-                    }
+                    {campos.map(campo => <TableCell>{campo.titulo}</TableCell>)}
+                    <CellDeleta removeDados titulo />
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -25,17 +43,7 @@ const Tabela = props => {
                     dados.map(dado => (
                         <TableRow key={dado.id}>
                             {campos.map(campo => (<TableCell>{dado[campo.dado]}</TableCell>))}
-                            <TableCell>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => {
-                                        removeAutor(dado.id)
-                                    }}
-                                >
-                                    Remover
-                                    </Button>
-                            </TableCell>
+                            <CellDeleta removeDados={removeDados} id={dado.id} />
                         </TableRow>
                     ))
                 }
