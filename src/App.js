@@ -6,58 +6,51 @@ import Header from './Header';
 import Tabela from './Tabela';
 import Form from './Formulario';
 import PopUp from './PopUp';
+import ApiService from './ApiService';
 
 class App extends Component {
 
-  state = {
-    autores: [
-      {
-        nome: 'Zygmunt Bauman',
-        livro: 'Modernidade Líquida',
-        preco: 'R$ 100'
-      },
-      {
-        nome: 'Zygmunt Bauman',
-        livro: 'Amor Líquido',
-        preco: 'R$ 100'
-      },
-      {
-        nome: 'Zygmunt Bauman',
-        livro: 'Vida Líquida',
-        preco: 'R$ 100'
-      },
-      {
-        nome: 'Zygmunt Bauman',
-        livro: 'Medo Líquido',
-        preco: 'R$ 100'
-      },
-      {
-        nome: 'Zygmunt Bauman',
-        livro: 'Tempos Líquidos',
-        preco: 'R$ 100'
-      }
-    ],
-  };
+  constructor(props) {
 
-  removeAutor = index => {
+    super(props);
+
+    this.state = {
+      autores: [],
+    };
+  }
+
+  removeAutor = id => {
 
     const { autores } = this.state;
 
     this.setState(
       {
-        autores: autores.filter((autor, posAtual) => {
+        autores: autores.filter((autor) => {
 
-          return posAtual !== index;
+          return autor.id !== id;
         }),
       }
     );
+    ApiService.RemoveAutor(id);
     PopUp.exibeMensagem("success", "Autor removido com sucesso");
   }
 
   escutadorDeSubmit = autor => {
 
-    this.setState({ autores: [...this.state.autores, autor] });
-    PopUp.exibeMensagem("success", "Autor adicionado com sucesso");
+    ApiService.CriaAutor(JSON.stringify(autor))
+      .then(res => res.data)
+      .then(autor => {
+        this.setState({ autores: [...this.state.autores, autor] });
+        PopUp.exibeMensagem("success", "Autor adicionado com sucesso");
+      });
+  }
+
+  componentDidMount() {
+
+    ApiService.ListaAutores()
+      .then(res => {
+        this.setState({autores : [...this.state.autores, ...res.data]})
+      });
   }
 
   render() {

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Header from './Header';
 
 import DataTable from './DataTable'
+import ApiService from './ApiService';
 
 class Livros extends Component {
 
@@ -9,43 +10,18 @@ class Livros extends Component {
         super(props);
 
         this.state = {
-            autores: [
-                {
-                    id: 1,
-                    nome: 'Zygmunt Bauman',
-                    livro: 'Modernidade Líquida',
-                    preco: 'R$ 100'
-                },
-                {
-                    id: 2,
-                    nome: 'Zygmunt Bauman',
-                    livro: 'Amor Líquido',
-                    preco: 'R$ 100'
-                },
-                {
-                    id: 3,
-                    nome: 'Zygmunt Bauman',
-                    livro: 'Vida Líquida',
-                    preco: 'R$ 100'
-                },
-                {
-                    id: 4,
-                    nome: 'Zygmunt Bauman',
-                    livro: 'Medo Líquido',
-                    preco: 'R$ 100'
-                },
-                {
-                    id: 5,
-                    nome: 'Zygmunt Bauman',
-                    livro: 'Tempos Líquidos',
-                    preco: 'R$ 100'
-                }
-            ],
+            livros: [],
             titulo: 'Livros'
         };
     }
 
+    componentDidMount() {
 
+        ApiService.ListaLivros()
+            .then(res => {
+                this.setState({ livros: [...this.state.livros, ...res.data] })
+            });
+    }
 
     render() {
         return (
@@ -53,7 +29,7 @@ class Livros extends Component {
                 <Header />
                 <div className="container">
                     <h1>Livros</h1>
-                    <DataTable dados={this.state.autores} titulo={this.state.titulo} colunas={['livro']} />
+                    <DataTable dados={this.state.livros} titulo={this.state.titulo} colunas={['livro']} />
 
                 </div>
             </Fragment>
