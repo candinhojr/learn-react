@@ -70,7 +70,7 @@ class Home extends Component {
       <Fragment>
         <Header />
         <div className="container mb-10">
-          <h1>Nossa Livraria</h1>
+          <h1>Casa do Código</h1>
           <Tabela campos={campos} dados={this.state.autores} removeDados={this.removeAutor} />
           <Form escutadorDeSubmit={this.escutadorDeSubmit} />
         </div>
