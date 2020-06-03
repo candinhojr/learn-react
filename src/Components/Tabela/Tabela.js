@@ -26,6 +26,12 @@ const CellDeleta = ({ removeDados, id, titulo }) => {
     )
 }
 
+const TituloDeleta = ({ removeDados }) => {
+    if (!removeDados) return null
+    
+    return <TableCell>Remover</TableCell>
+}
+
 const Tabela = props => {
 
     const { campos, dados, removeDados } = props;
@@ -35,7 +41,7 @@ const Tabela = props => {
             <TableHead>
                 <TableRow>
                     {campos.map(campo => <TableCell>{campo.titulo}</TableCell>)}
-                    <CellDeleta removeDados={removeDados} titulo />
+                    <TituloDeleta removeDados={removeDados} />
                 </TableRow>
             </TableHead>
             <TableBody>
