@@ -36,7 +36,13 @@ class Home extends Component {
       .catch(erro => PopUp.exibeMensagem("error", "Erro na comunicação com a API ao tentar remover o autor"));
   }
 
-  escutadorDeSubmit = autor => {
+  escutadorDeSubmit = dados => {
+
+    const autor = {
+      nome: dados.nome,
+      livro: dados.livro,
+      preco: dados.preco
+    }
 
     ApiService.CriaAutor(JSON.stringify(autor))
       .then(res => {
