@@ -12,8 +12,7 @@ class Formulario extends Component {
 
         super(props);
 
-        this.validador = new FormValidator([
-            {
+        this.validador = new FormValidator([{
                 campo: 'nome',
                 metodo: 'isEmpty',
                 validoQuando: false,
@@ -73,7 +72,7 @@ class Formulario extends Component {
                 return elem.isInvalid;
             });
             const erros = camposInvalidos.reduce(
-                (erros, campo) => erros + campo.mensagem + '. ',
+                (erros, campo) => erros + campo.message + '. ',
                 ''
             )
 
